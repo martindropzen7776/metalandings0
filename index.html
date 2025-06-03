@@ -80,35 +80,57 @@
 <body>
 
     <div class="container">
-<!-- CONTADOR EN ENCABEZADO -->
-<div style="background-color: #efb810; color: #000; text-align: center; padding: 10px 0; font-weight: bold; font-size: 18px; font-family: sans-serif;">
-    💸 ¡Precio solo por hoy! Activá tu sistema por <span id="countdown" style="color: red;"></span>
+<!-- CONTADOR FIJO DE OFERTA -->
+<div id="fixed-countdown">
+    🔥 Oferta válida solo por hoy — Activá el Arsenal por <span id="countdown">00h 00m 00s</span>
 </div>
 
+<style>
+#fixed-countdown {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1e1e1e;
+    color: #efb810;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 0;
+    font-family: 'Arial', sans-serif;
+    z-index: 9999;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+body {
+    padding-top: 50px; /* para que no se superponga el contenido */
+}
+</style>
+
 <script>
-// Setea el contador a medianoche de hoy (23:59)
-const countdownDate = new Date();
-countdownDate.setHours(23, 59, 59, 999);
+// Setea el contador para las 23:59 del día actual
+const countdownTarget = new Date();
+countdownTarget.setHours(23, 59, 59, 999);
 
-const countdown = document.getElementById("countdown");
+const countdownEl = document.getElementById("countdown");
 
-const updateCountdown = setInterval(() => {
+const interval = setInterval(() => {
     const now = new Date().getTime();
-    const distance = countdownDate - now;
+    const distance = countdownTarget - now;
 
     if (distance < 0) {
-        clearInterval(updateCountdown);
-        countdown.innerHTML = "TIEMPO AGOTADO";
+        clearInterval(interval);
+        countdownEl.innerHTML = "TIEMPO AGOTADO";
         return;
     }
 
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((distance % (1000 * 60)) / 1000);
 
-    countdown.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+    countdownEl.innerHTML = `${h}h ${m}m ${s}s`;
 }, 1000);
 </script>
+
         
 <h1 style="color: #efb810; text-align: center;">🔥 ACTIVÁ TU SISTEMA AUTOMÁTICO DE MARKETING</h1>
     <p>🤖 +50 Bots GPT listos para vender, responder y crear contenido</p>

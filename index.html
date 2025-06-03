@@ -82,7 +82,7 @@
     <div class="container">
 <!-- CONTADOR FIJO DE OFERTA -->
 <div id="fixed-countdown">
-    🔥 Oferta válida solo por hoy — Activá el Arsenal por <span id="countdown">00h 00m 00s</span>
+    🔥 Oferta válida solo por hoy <span id="countdown">24h 00m 00s</span>
 </div>
 
 <style>
@@ -102,14 +102,13 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 body {
-    padding-top: 50px; /* para que no se superponga el contenido */
+    padding-top: 50px;
 }
 </style>
 
 <script>
-// Setea el contador para las 23:59 del día actual
-const countdownTarget = new Date();
-countdownTarget.setHours(23, 59, 59, 999);
+// Setea el contador a 24 horas desde ahora
+const countdownTarget = new Date().getTime() + 24 * 60 * 60 * 1000;
 
 const countdownEl = document.getElementById("countdown");
 
